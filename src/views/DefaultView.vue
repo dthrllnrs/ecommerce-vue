@@ -7,13 +7,16 @@
       </main>
     </div>
   </div>
+  <CartModal />
 </template>
 <script>
 import { RouterView } from 'vue-router'
 import TheNavbar from '@/components/parts/TheNavbar.vue';
+import CartModal from '@/components/cart/CartModal.vue';
 export default {
   components: {
-    TheNavbar
+    TheNavbar,
+    CartModal,
   },
 }
 </script>

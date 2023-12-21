@@ -8,30 +8,56 @@
     </div>
     <div class="product-description-container px-2">
       <p class="product-description">{{ product.short_description }}</p>
-      <button class="btn btn-primary w-100 fw-bold text-white">Add to Cart</button>
+      <button v-if="cartStatus === 0" class="btn btn-primary w-100 fw-bold text-white" @click="cartStatus = 1">Add to Cart</button>
+      <div class="input-group" v-if="cartStatus === 1">
+        <input type="number" min="1" v-model="quantity" class="form-control" >
+        <button class="btn btn-primary fw-bold text-white" type="button" @click="handleAddToCart">Add to Cart</button>
+      </div>
+      <span v-if="cartStatus === 2" class="w-100 d-block rounded p-2 bg-primary text-center text-white fw-bold">
+        Added to Cart
+      </span>
     </div>
   </div>
 </template>
 <script>
 import { USDollar } from '@/helpers/formatters';
 import apiConfig from '@/config/api';
+import { useProductStore } from '@/stores/productStore';
+import cartSVG from '@/assets/svg/cart.svg';
 
 export default {
   setup() {
+    const productStore = useProductStore();
       return {
           apiConfig,
+          productStore,
+          cartSVG,
       };
   },
   props: ['product'],
   data() {
     return {
+      quantity: 1,
+      cartStatus: 0,
     }
   },
   computed: {
     formattedPrice() {
       return USDollar.format(this.product.price);
     }
-  }
+  },
+  methods: {
+    handleAddToCart() {
+      if (this.quantity < 1) {
+        this.quantity = 1;
+      }
+      this.productStore.addProductToCart(this.product, this.quantity);
+      this.cartStatus = 2;
+      setTimeout(() => {
+        this.cartStatus = 0;
+      }, 2000);
+    }
+  },
 }
 </script>
 
