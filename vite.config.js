@@ -12,9 +12,12 @@ export default defineConfig({
     host: true,
     port: 3000,
     hmr: {
-      host: 'ecommerce.work',
+      host: 'admin-panel.work',
       clientPort: 80,
     },
+    watch: {
+      usePolling: true,
+    }
   },
   resolve: {
     alias: {
