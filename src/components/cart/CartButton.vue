@@ -8,9 +8,9 @@
 </template>
 
 <script>
+import { useModalStore } from '@/stores/modalStore';
 import { useProductStore } from '@/stores/productStore';
 import { mapState } from 'pinia';
-import { Modal } from 'bootstrap';
 
 export default {
   setup() {
@@ -21,22 +21,15 @@ export default {
   },
   computed: {
     ...mapState(useProductStore, ['cartProducts']),
+    ...mapState(useModalStore, ['cartModal']),
     itemCount() {
       return this.productStore.cartLength;
     },
-  },
-  data() {
-    return {
-      cartModal: null,      
-    }
   },
   methods: {
     handleShowCart() {
       this.cartModal.show();
     },
-  },
-  mounted() {
-    this.cartModal = new Modal(document.getElementById('cartModal'));    
   },
 }
 </script>

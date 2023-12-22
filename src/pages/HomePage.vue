@@ -36,10 +36,12 @@ export default {
     ...mapState(useProductStore, ['products']),
   },
   mounted() {
-    this.showLoading = true;
-    this.productStore.fetchProducts().finally(() => {
-      this.showLoading = false;
-    });
+    if (this.products.length === 0) {
+      this.showLoading = true;
+      this.productStore.fetchProducts().finally(() => {
+        this.showLoading = false;
+      });
+    }
   },
 }
 </script>

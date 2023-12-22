@@ -4,7 +4,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">My <span class="text-primary">Cart</span></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" @click="hideModal"></button>
         </div>
         <div class="modal-body">
           <table class="table">
@@ -18,7 +18,7 @@
               </tr>
             </thead>
             <tbody>
-              <template v-for="cartProduct in cartProducts">
+              <template v-for="(cartProduct, index) in cartProducts" :key="index">
                 <tr>
                   <td><CartProduct :product="cartProduct.product" /></td>
                   <td><input min="1" type="number" class="form-control" :value="cartProduct.quantity" @change="handleQuantityChange(cartProduct.product, $event.target.value)"></td>
@@ -36,8 +36,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary fw-bold text-white">Proceed to Checkout</button>
+          <button type="button" class="btn btn-secondary" @click="hideModal">Close</button>
+          <button type="button" class="btn btn-primary fw-bold text-white" @click="proceedToCheckout">Proceed to Checkout</button>
         </div>
       </div>
     </div>
@@ -48,6 +48,8 @@ import { USDollar } from '@/helpers/formatters';
 import { useProductStore } from '@/stores/productStore';
 import { mapState } from 'pinia';
 import CartProduct from '@/components/cart/CartProduct.vue';
+import { RouterLink } from 'vue-router';
+import { Modal } from 'bootstrap';
 
 export default {
   setup() {
@@ -77,6 +79,14 @@ export default {
       if (confirm(`Remove ${product.name} from cart?`) === true) {
         this.productStore.removeCartProduct(product);
       }
+    },
+    hideModal() {
+      const modal = Modal.getInstance(document.getElementById('cartModal'));
+      modal.hide();
+    },
+    proceedToCheckout() {
+      this.hideModal();
+      this.$router.push('/checkout');
     }
   },
 }

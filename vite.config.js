@@ -12,7 +12,7 @@ export default defineConfig({
     host: true,
     port: 3000,
     hmr: {
-      host: 'admin-panel.work',
+      host: 'ecommerce.work',
       clientPort: 80,
     },
     watch: {

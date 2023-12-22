@@ -2,7 +2,7 @@
   <div class="product-card pb-2">
     <div class="product-details mb-1" :style="{'background-image': `url(${`${apiConfig.BASE_URL}/storage/images/${product.thumbnail}`})`}">
       <div class="product-info">
-        <span class="product-name fs-3 fw-bold text-primary text-capitalize">{{ product.name }}</span>
+        <RouterLink :to="`products/${product.id}`" class="text-decoration-none product-name fs-3 fw-bold text-primary text-capitalize">{{ product.name }}</RouterLink>
         <p class="product-price fw-semibold text-black"><span>{{ formattedPrice }}</span></p>
       </div>
     </div>
@@ -24,6 +24,7 @@ import { USDollar } from '@/helpers/formatters';
 import apiConfig from '@/config/api';
 import { useProductStore } from '@/stores/productStore';
 import cartSVG from '@/assets/svg/cart.svg';
+import { RouterLink } from 'vue-router';
 
 export default {
   setup() {

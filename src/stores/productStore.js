@@ -1,6 +1,15 @@
 import { defineStore } from 'pinia'
 import api from '@/services/api';
 
+const formatCartProducts  = (cartProducts) => Object.values(cartProducts).map((cartProduct) => {
+  const { product, ...rest } = cartProduct;
+  return {
+    ...rest,
+    id: product.id,
+    unit_price: product.price,
+  };
+});
+
 export const useProductStore = defineStore('product', {
   state: () => ({
     products: [],
@@ -22,7 +31,6 @@ export const useProductStore = defineStore('product', {
       return new Promise((resolve, reject) => {
         api.get('products').then((response) => {
           const { data: products } = response.data;
-          console.log(products);
           this.products = products;
           resolve(products);
         }).catch((error) => {
@@ -30,6 +38,16 @@ export const useProductStore = defineStore('product', {
         });
       });
     },
+    async fetchProductById(id) {
+      return new Promise((resolve, reject) => {
+        api.get(`products/${id}`).then((response) => {
+          const { data: product } = response.data;
+          resolve(product);
+        }).catch((error) => {
+          reject(error);
+        });
+      });
+    },    
     addProductToCart(cartProduct, quantity) {
       const { id, price } = cartProduct;
       if (this.cartProducts[id]) {
@@ -52,5 +70,22 @@ export const useProductStore = defineStore('product', {
       const { id } = cartProduct;
       delete this.cartProducts[id];
     },
+    checkout(customer) {
+      const data = {
+        customer,
+        products: formatCartProducts(this.cartProducts),
+        total: this.cartTotal,
+      }
+      return new Promise((resolve, reject) => {
+        api.post('/orders/create', data).then((response) => {
+          resolve(response);
+        }).catch((reject) => {
+          reject(error);
+        });
+      });
+    },
+    clearCart() {
+      this.cartProducts = {};
+    }
   },
 });
