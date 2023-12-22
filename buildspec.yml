@@ -1,0 +1,21 @@
+version: 0.2
+phases:
+  install:
+    on-failure: ABORT
+    runtime-versions:
+      php: node:21-alpine
+  pre_build:
+    on-failure: ABORT
+    commands:
+      - echo 'Loggin in to amazon ECR...'
+      - aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 768148000790.dkr.ecr.ap-southeast-1.amazonaws.com
+  build:
+    on-failure: ABORT
+    commands:
+      - docker build -t prod-ecommerce-vue -f Dockerfile.production .
+      - docker tag prod-ecommerce-vue:latest 768148000790.dkr.ecr.ap-southeast-1.amazonaws.com/prod-ecommerce-vue:latest
+  post_build:
+    on-failure: ABORT
+    commands:
+      - docker images ls -a
+      - docker push 768148000790.dkr.ecr.ap-southeast-1.amazonaws.com/prod-ecommerce-vue:latest
