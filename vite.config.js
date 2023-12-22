@@ -9,15 +9,7 @@ export default defineConfig({
     vue(),
   ],
   server: {
-    host: true,
-    port: 3000,
-    hmr: {
-      host: 'ecommerce.work',
-      clientPort: 80,
-    },
-    watch: {
-      usePolling: true,
-    }
+    port: 3000
   },
   resolve: {
     alias: {
