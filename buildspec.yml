@@ -3,7 +3,7 @@ phases:
   install:
     on-failure: ABORT
     runtime-versions:
-      node: 21-alpine
+      nodejs: 21-alpine
   pre_build:
     on-failure: ABORT
     commands:
