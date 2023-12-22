@@ -21,4 +21,4 @@ prod-build:
 	docker build -t ecommerce-vue-prod -f Dockerfile.production .
 
 prod-run:
-	docker run -it -p 8080:80 --rm --name ecommerce-vue-prod-1 ecommerce-vue-prod
+	docker run -it -p 80:80 --rm --name ecommerce-vue-prod-1 ecommerce-vue-prod
