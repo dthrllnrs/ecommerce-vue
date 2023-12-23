@@ -18,7 +18,7 @@ Local setup of [dthrllnrs/ecommerce-backend](https://github.com/dthrllnrs/ecomme
 Install using npm
 
 ```bash
-  make init-dev
+  make dev-init
 ```
   or
 ```bash
