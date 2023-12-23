@@ -1,41 +1,51 @@
-# ecommerce-frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+# VueJS + Docker Ecommerce
 
-## Recommended IDE Setup
+A vue js and docker ecommerce application
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-## Customize configuration
+## Tech Stack
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+**Client:** VueJS, Docker, Nginx. Bootstrap5
 
-## Project Setup
+**Server:** Laravel, MySql
 
-```sh
-npm install
+
+## Run Locally
+
+Install using npm
+
+```bash
+  make init-dev
 ```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
+  or
+```bash
+  docker build -f Dockerfile.development .
 ```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
+```bash
+  docker run -it -p 3000:3000 -v "${CURDIR}/src:/app/src"
 ```
+Your project will be available on [localhost:3000](localhost:3000)
+    
+## Features
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+- Browse product catalog
+- Add products to cart
+- Modify cart product quantity
+- Create order
+- Order receipt email
 
-```sh
-npm run test:unit
-```
 
-### Lint with [ESLint](https://eslint.org/)
+## Instructions
 
-```sh
-npm run lint
-```
+### Add to cart
+Browse products > Click `Add to cart` > Select quantity
+
+### View cart
+Click cart icon in the navbar
+
+### Modify cart product quantity
+View cart > Input quantity
+
+### Checkout
+View Cart > Click `Proceed to Checkout`
