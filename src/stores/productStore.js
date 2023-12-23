@@ -79,7 +79,7 @@ export const useProductStore = defineStore('product', {
       return new Promise((resolve, reject) => {
         api.post('/orders/create', data).then((response) => {
           resolve(response);
-        }).catch((reject) => {
+        }).catch((error) => {
           reject(error);
         });
       });

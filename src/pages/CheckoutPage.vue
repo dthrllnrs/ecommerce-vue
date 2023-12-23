@@ -59,7 +59,9 @@
             <label for="email">Email</label>
             <input v-model="customer.email" required type="email" placeholder="Email" name="email" id="email" class="form-control">
           </div>
-          <span class="text-danger d-block mb-3" v-if="apiError">Uncaught server error</span>
+          <template>
+            <span class="text-danger d-block mb-3" v-if="apiError">Uncaught server error</span>
+          </template>
           <span class="text-primary d-block mb-3" v-if="apiSuccess">Order successful. Redirecting...</span>
           <button v-else class="btn btn-primary fw-bold text-white w-100" type="submit" :disabled="loading">{{ loading ? 'Loading...' : 'Checkout' }}</button>
         </form>
