@@ -11,6 +11,8 @@ A vue js and docker ecommerce application
 **Server:** Laravel, MySql
 
 
+## Prerequisites
+Local setup of [dthrllnrs/ecommerce-backend](https://github.com/dthrllnrs/ecommerce-backend)
 ## Run Locally
 
 Install using npm
@@ -49,3 +51,7 @@ View cart > Input quantity
 
 ### Checkout
 View Cart > Click `Proceed to Checkout`
+## Demo
+
+[Demo](http://purchasepro.dthrllnrs.com/)
+
