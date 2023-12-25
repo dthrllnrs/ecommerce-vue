@@ -25,7 +25,10 @@
                 </div>
               </div>
               <div class="col-12">
-                <button class="btn btn-primary w-100 fw-bold text-white mb-2" @click="handleAddToCart">Add to Cart</button>
+                <span v-if="cartStatus === 2" class="w-100 d-block rounded p-2 bg-primary text-center text-white fw-bold">
+                  Added to Cart
+                </span>
+                <button v-else class="btn btn-primary w-100 fw-bold text-white mb-2" @click="handleAddToCart">Add to Cart</button>
                 <RouterLink to="/" custom v-slot="{ navigate }">
                   <button class="btn btn-secondary w-100 fw-bold" @click="navigate">Back to product list</button>
                 </RouterLink>
@@ -64,7 +67,7 @@ export default {
     return {
       quantity: 1,
       product: {},
-      apiError: false,
+      cartStatus: 1,
     }
   },
   methods: {
@@ -73,6 +76,10 @@ export default {
         this.quantity = 1;
       }
       this.productStore.addProductToCart(this.product, this.quantity);
+      this.cartStatus = 2;
+      setTimeout(() => {
+        this.cartStatus = 1;
+      }, 2000);
     },
   },
   mounted() {
