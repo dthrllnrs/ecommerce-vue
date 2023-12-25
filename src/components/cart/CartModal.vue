@@ -10,9 +10,9 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col" style="width: 70%">Product</th>
+                <th scope="col" class="product-column">Product</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Price</th>
+                <th scope="col" class="d-none d-md-block">Price</th>
                 <th scope="col">Total</th>
                 <th scope="col">Actions</th>
               </tr>
@@ -22,7 +22,7 @@
                 <tr>
                   <td><CartProduct :product="cartProduct.product" /></td>
                   <td><input min="1" type="number" class="form-control" :value="cartProduct.quantity" @change="handleQuantityChange(cartProduct.product, $event.target.value)"></td>
-                  <td class="currency"><span>{{ USDollar.format(cartProduct.product.price) }}</span></td>
+                  <td class="currency d-none d-md-block"><span>{{ USDollar.format(cartProduct.product.price) }}</span></td>
                   <td class="currency"><span>{{ USDollar.format(cartProduct.total) }}</span></td>
                   <td class="text-center"><button class="btn btn-danger" @click="handleRemoveProduct(cartProduct.product)">&#x00d7;</button></td>
                 </tr>
@@ -100,6 +100,12 @@ export default {
         .currency {
           text-align: right;
         }
+      }
+    }
+    .product-column {
+      width: 40%;
+      @media (min-width: 768px) {
+        width: 70%
       }
     }
   }

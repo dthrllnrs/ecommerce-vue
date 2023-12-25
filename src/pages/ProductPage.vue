@@ -25,7 +25,7 @@
                 </div>
               </div>
               <div class="col-12">
-                <span v-if="cartStatus === 2" class="w-100 d-block rounded p-2 bg-primary text-center text-white fw-bold">
+                <span v-if="cartStatus === 2" class="w-100 d-block rounded p-2 bg-primary text-center text-white fw-bold mb-2">
                   Added to Cart
                 </span>
                 <button v-else class="btn btn-primary w-100 fw-bold text-white mb-2" @click="handleAddToCart">Add to Cart</button>
